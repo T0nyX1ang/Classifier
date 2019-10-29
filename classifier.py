@@ -9,8 +9,6 @@ import os, shutil, time
 SOURCE_DIR = os.getcwd()
 TARGET_DIR = os.path.join(os.getcwd(), 'Classify')
 
-print(TARGET_DIR)
-
 # include more extension here is acceptable
 FILE_TABLE = {
 	'Documents': ('txt', 'pdf', 'dvi', 'ps', ),
@@ -52,16 +50,16 @@ def classify():
 		is_directory = os.path.isdir(filename)
 		if not is_directory:
 			# deal with a single file
-			extension = filename.split('.')[-1]
 			filesize = os.path.getsize(filename)
+			file_name, extension = os.path.splitext(filename)
 			if (filesize == 0 and DELECT_EMPTY):
 				print('Removing empty file:', filename)
 				os.remove(filename)
 			else:
-				filepath = os.path.join(TARGET_DIR, find_type(extension.lower()))
+				filepath = os.path.join(TARGET_DIR, find_type(extension[1:].lower()))
 				dirs = os.path.join(filepath, filename)
 				if os.path.exists(dirs):
-					dirs = filepath + filename[:-1] + str(time.time()) + extension
+					dirs = os.path.join(filepath, file_name + '_' + str(time.time()) + extension)
 				shutil.move(filename, dirs)
 		else:
 			# deal with a directory
