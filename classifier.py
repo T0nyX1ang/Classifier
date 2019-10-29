@@ -58,16 +58,16 @@ def classify():
 				print('Removing empty file:', filename)
 				os.remove(filename)
 			else:
-				filepath = os.path.join(TARGET_DIR, find_type(extension))
+				filepath = os.path.join(TARGET_DIR, find_type(extension.lower()))
 				dirs = os.path.join(filepath, filename)
 				if os.path.exists(dirs):
-					dirs = os.path.join(dirs, str(time.time()))
+					dirs = filepath + filename[:-1] + str(time.time()) + extension
 				shutil.move(filename, dirs)
 		else:
 			# deal with a directory
 			dirs = os.path.join(TARGET_DIR, filename)
 			if os.path.exists(dirs):
-				dirs = os.path.join(dirs, str(time.time()))
+				dirs = dirs + '_' + str(time.time())
 			shutil.move(filename, dirs)
 
 if __name__ == '__main__':
