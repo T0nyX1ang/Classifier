@@ -11,5 +11,9 @@ Under development now, preparing to archive these goals:
 - [ ] Mimetype switch (manage by mimetype).
 - [ ] Python package generation.
 
-# Usage:
+## Usage:
 * Under development now, please do not use it until it becomes stable.
+
+## License:
+* Under MIT License, see LICENSE for more details.
+* Copyright (c) 2019 Tony Xiang.
