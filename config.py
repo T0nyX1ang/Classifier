@@ -6,6 +6,7 @@ import sys
 parser = argparse.ArgumentParser(description='This file is used to make configurations.')
 parser.add_argument('-n', '--name', type=str, help='Set the name of a single extension set.')
 parser.add_argument('-e', '--extension', nargs='*', help='Define the extensions to classify your files.')
+parser.add_argument('-f', '--force', action='store_true', help='Forcibly change the category of an extension.')
 args = parser.parse_args()
 
 if not os.path.exists('config.json'):
@@ -25,7 +26,10 @@ extension = [] if args.extension is None else args.extension
 for ext in extension:
 	if ext not in config:
 		config[ext] = args.name 
-		print('Setting "%s" to "%s" catagory.' % (ext, args.name))
+		print('Setting "%s" to "%s" category.' % (ext, args.name))
+	elif args.force:
+		config[ext] = args.name 
+		print('Forcibly setting "%s" to "%s" category.' % (ext, args.name))		
 	else:
 		print('This extension "%s" has been configured before, ignoring it.' % ext)
 
