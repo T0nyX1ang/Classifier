@@ -3,11 +3,11 @@ A simple classifier to manage your messy desktop files.
 
 Under development now, preparing to archive these goals:
 
-- [ ] Configuration for files' extensions. 
-- [ ] Folder recursive searching switch.
-- [ ] Regular expression searching.
-- [ ] Source and target folder detection.
-- [ ] Symlink detection (especially on Windows).
+- [x] Configuration for files' extensions. 
+~~- [ ] Folder recursive searching switch.~~
+- [ ] Regular expression searching (using a blacklist to block some files).
+- [x] Source and target folder detection.
+- [x] Symlink detection (especially on Windows).
 - [ ] Mimetype switch (manage by mimetype).
 - [ ] Python package generation.
 
