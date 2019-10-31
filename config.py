@@ -9,16 +9,19 @@ parser.add_argument('-e', '--extension', nargs='*', help='Define the extensions 
 parser.add_argument('-f', '--force', action='store_true', help='Forcibly change the category of an extension.')
 args = parser.parse_args()
 
-if not os.path.exists('config.json'):
-	with open('config.json', 'w') as f:
+working_path = os.path.split(os.path.realpath(__file__))[0] # making configurations into the same directory of this project
+config_path = os.path.join(working_path, 'config.json')
+
+if not os.path.exists(config_path):
+	with open(config_path, 'w') as f:
 		f.write(json.dumps({}))
 
-with open('config.json', 'r') as f:
+with open(config_path, 'r') as f:
 	config = json.loads(f.read())
 
 # Setting the name
-if args.name is None:
-	print('A name should be given to describe the extension set.')
+if args.name is None or args.name == 'Others':
+	print('A name should be given to describe the extension set, and it should not be "Others".')
 	sys.exit()
 
 # Setting extension
@@ -33,7 +36,7 @@ for ext in extension:
 	else:
 		print('This extension "%s" has been configured before, ignoring it.' % ext)
 
-with open('config.json', 'w') as f:
+with open(config_path, 'w') as f:
 	f.write(json.dumps(config, indent=4))
 
 print('The configuration is updated successfully.')
