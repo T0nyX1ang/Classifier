@@ -84,6 +84,9 @@ if args.swipe:
 	if len(os.listdir(args.source)) > 0:
 		print('The source folder is not empty, this action is harmful.')
 		sys.exit()
+	elif args.source == os.getcwd():
+		print('You are into the source folder, please get out first.')
+		sys.exit()
 	else:
 		print('Swiping the source folder.')
 		os.rmdir(args.source)
