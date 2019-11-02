@@ -22,6 +22,7 @@ if os.path.exists(config_path):
 	with open(config_path, 'r') as f:
 		config = json.loads(f.read())
 		hash_id = hashlib.md5(f.read().encode('utf-8')).hexdigest()
+		time_id = str(time.time())
 	print('Configuration is loaded successfully.')
 else:
 	print('Please generate a configuration file first.')
@@ -47,7 +48,7 @@ else:
 	print('Creating destination workspace:', args.destination)
 	os.mkdir(args.destination)
 
-folder_name = hash_id + '_' + str(time.time())
+folder_name = hash_id + '_' + time_id
 dest_dir = os.path.join(args.destination, folder_name)
 os.mkdir(dest_dir)
 blacklist.append(dest_dir) # append the destination directory to the end of blacklist
@@ -59,26 +60,28 @@ for extension in config:
 os.mkdir(os.path.join(dest_dir, 'Others'))
 
 # Classify
-def classify(directory):
-	for filename in os.listdir(directory):
-		if os.path.realpath(directory) in blacklist or filename in blacklist:
-			continue # blacklist detection
-		filename = os.path.join(os.path.realpath(directory), filename)
-		if args.empty and os.path.getsize(filename) == 0:
-			print('Removing empty file:', filename)
-			os.remove(filename) # empty file deletion
-			continue 
-		if os.path.isfile(filename):
-			filepath, extension = os.path.splitext(filename)
-			extension = extension.replace('.', '').lower()
-			if extension in config:
-				shutil.move(filename, os.path.join(dest_dir, config[extension]))
-			else:
-				shutil.move(filename, os.path.join(dest_dir, 'Others'))
+for filename in os.listdir(args.source):
+	if os.path.realpath(args.source) in blacklist or os.path.join(args.source, filename) in blacklist:
+		continue # blacklist detection
+	filename = os.path.join(os.path.realpath(args.source), filename)
+	if args.empty and os.path.getsize(filename) == 0 and os.path.isfile(filename):
+		print('Removing empty file:', filename)
+		os.remove(filename) # empty file deletion
+		continue 
+	if os.path.isfile(filename):
+		filepath, extension = os.path.splitext(filename)
+		extension = extension.replace('.', '').lower()
+		if extension in config:
+			shutil.move(filename, os.path.join(dest_dir, config[extension]))
 		else:
+			shutil.move(filename, os.path.join(dest_dir, 'Others'))
+	else:
+		if not os.path.exists(os.path.join(dest_dir, filename)):
 			shutil.move(filename, dest_dir)
-			
-classify(args.source)
+		else:
+			new_name = 'Duplication_' + time_id
+			os.mkdir(os.path.join(dest_dir, new_name))
+			shutil.move(filename, os.path.join(dest_dir, new_name))
 
 if args.swipe:
 	if len(os.listdir(args.source)) > 0:
