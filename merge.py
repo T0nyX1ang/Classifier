@@ -3,7 +3,7 @@ import os
 import sys
 import shutil
 
-parser = argparse.ArgumentParser(description='This file is used to move files from a earlier folder to a newer folder.')
+parser = argparse.ArgumentParser(description='This file is used to merge folders based on their created time.')
 parser.add_argument('-d', '--directory', type=str, help='Set the name of a base directory to merge.')
 parser.add_argument('-r', '--reverse', action='store_true', help='Reverse the order of folders in the directory.')
 args = parser.parse_args()

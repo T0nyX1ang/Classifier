@@ -48,14 +48,15 @@ optional arguments:
 
 * merge.py:
 ```
-usage: merge.py [-h] [-d DIRECTORY DIRECTORY]
+usage: merge.py [-h] [-d DIRECTORY] [-r]
 
-This file is used to move files from a earlier folder to a newer folder.
+This file is used to merge folders based on their created time.
 
 optional arguments:
   -h, --help            show this help message and exit
-  -d DIRECTORY DIRECTORY, --directory DIRECTORY DIRECTORY
-                        Set the name of a single extension set.
+  -d DIRECTORY, --directory DIRECTORY
+                        Set the name of a base directory to merge.
+  -r, --reverse         Reverse the order of folders in the directory.
 ```
 
 ## License:
