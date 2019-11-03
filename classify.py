@@ -5,6 +5,7 @@ import time
 import json
 import hashlib
 import argparse
+import glob
 
 parser = argparse.ArgumentParser(description='This file is used to make classfications.')
 parser.add_argument('-s', '--source', help='Setting source directory (files to move out).')
@@ -60,9 +61,17 @@ for extension in config:
 		os.mkdir(final_dir)
 os.mkdir(os.path.join(dest_dir, 'Others'))
 
+def check_blacklist(filename):
+	if filename in blacklist:
+		return True
+	for black in blacklist:
+		if filename in glob.glob(black) or filename in glob.glob(os.path.join(args.source, black)):
+			return True
+	return False
+
 # Classify
 for filename in os.listdir(args.source):
-	if os.path.realpath(args.source) in blacklist or os.path.join(args.source, filename) in blacklist:
+	if os.path.realpath(args.source) in blacklist or check_blacklist(os.path.join(args.source, filename)):
 		continue # blacklist detection
 	filename = os.path.join(os.path.realpath(args.source), filename)
 	if args.empty and os.path.getsize(filename) == 0 and os.path.isfile(filename):
@@ -80,7 +89,7 @@ for filename in os.listdir(args.source):
 		if not os.path.isdir(os.path.join(dest_dir, os.path.split(filename)[-1])):
 			shutil.move(filename, dest_dir)
 		else:
-			new_name = 'Duplication_' + time_id
+			new_name = 'Duplication_' + time_id # Isolate duplicated folders
 			os.mkdir(os.path.join(dest_dir, new_name))
 			shutil.move(filename, os.path.join(dest_dir, new_name))
 
