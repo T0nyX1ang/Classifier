@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 setup(
-	name='Classifier',
+	name='file-classifier',
 	version='0.1.0',
 	keywords=['File Management', 'Classification'],
 	packages=find_packages(),
