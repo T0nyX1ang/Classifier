@@ -1,15 +1,6 @@
 # Classifier
 A simple classifier to manage your messy desktop files.
 
-Under development now, preparing to archive these goals:
-
-- [x] Configuration for extensions.
-- [x] Merging folders & folder isolation.
-- [x] Regular expression searching (using a blacklist to block some files).
-- [x] Source and target folder detection.
-- [x] Symlink detection (especially on Windows).
-- [ ] Python package generation.
-
 ## Usage:
 * config.py:
 ```
