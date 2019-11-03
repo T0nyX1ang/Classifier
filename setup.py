@@ -6,7 +6,7 @@ setup(
 	packages=find_packages(),
 	description='A simple classifier to manage your messy desktop files.',
 	author='Tony Xiang',
-	author_email='tonyxfy[#]gmail.com',
+	author_email='tonyxfy@qq.com',
 	url='https://github.com/T0nyX1ang/Classifier',
 	classifiers=[
 		'Development Status :: 3 - Alpha',
