@@ -5,7 +5,7 @@ Under development now, preparing to archive these goals:
 
 - [x] Configuration for extensions.
 - [x] Merging folders & folder isolation.
-- [ ] Regular expression searching (using a blacklist to block some files).
+- [x] Regular expression searching (using a blacklist to block some files).
 - [x] Source and target folder detection.
 - [x] Symlink detection (especially on Windows).
 - [ ] Mimetype switch (manage by mimetype).
@@ -37,11 +37,12 @@ This file is used to make classfications.
 optional arguments:
   -h, --help            show this help message and exit
   -s SOURCE, --source SOURCE
-                        Setting source directory (files to move out).
+                        Set source directory (files to move out).
   -d DESTINATION, --destination DESTINATION
-                        Setting destination directory (files to move into).
+                        Set destination directory (files to move into).
   -b [BLACKLIST [BLACKLIST ...]], --blacklist [BLACKLIST [BLACKLIST ...]]
-                        Setting files/folders to be ignored.
+                        Set files/folders to be ignored. Regular expression is
+                        supported.
   -e, --empty           Empty file deletion.
   -p, --swipe           Swipe the empty folder after file moves.
 ```

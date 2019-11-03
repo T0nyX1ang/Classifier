@@ -8,9 +8,9 @@ import argparse
 import glob
 
 parser = argparse.ArgumentParser(description='This file is used to make classfications.')
-parser.add_argument('-s', '--source', help='Setting source directory (files to move out).')
-parser.add_argument('-d', '--destination', help='Setting destination directory (files to move into).')
-parser.add_argument('-b', '--blacklist', nargs='*', help='Setting files/folders to be ignored.')
+parser.add_argument('-s', '--source', help='Set source directory (files to move out).')
+parser.add_argument('-d', '--destination', help='Set destination directory (files to move into).')
+parser.add_argument('-b', '--blacklist', nargs='*', help='Set files/folders to be ignored. Regular expression is supported.')
 parser.add_argument('-e', '--empty', action='store_true', help='Empty file deletion.')
 parser.add_argument('-p', '--swipe', action='store_true', help='Swipe the empty folder after file moves.')
 args = parser.parse_args()
