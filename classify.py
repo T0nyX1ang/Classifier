@@ -20,9 +20,10 @@ config_path = os.path.join(working_path, 'config.json')
 
 if os.path.exists(config_path):
 	with open(config_path, 'r') as f:
-		config = json.loads(f.read())
-		hash_id = hashlib.md5(f.read().encode('utf-8')).hexdigest()
-		time_id = str(time.time())
+		fin = f.read() # read once
+		config = json.loads(fin)
+		hash_id = hashlib.md5(fin.encode('utf-8')).hexdigest()
+	time_id = str(time.time())
 	print('Configuration is loaded successfully.')
 else:
 	print('Please generate a configuration file first.')
@@ -76,7 +77,7 @@ for filename in os.listdir(args.source):
 		else:
 			shutil.move(filename, os.path.join(dest_dir, 'Others'))
 	else:
-		if not os.path.exists(os.path.join(dest_dir, filename)):
+		if not os.path.isdir(os.path.join(dest_dir, os.path.split(filename)[-1])):
 			shutil.move(filename, dest_dir)
 		else:
 			new_name = 'Duplication_' + time_id
