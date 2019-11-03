@@ -1,6 +1,21 @@
 # Classifier
 A simple classifier to manage your messy desktop files.
 
+## Installation:
+* Using pip:
+```
+  pip install file-classifier
+```
+
+* Install from code:
+```
+  git clone https://github.com/T0nyX1ang/Classifier.git
+  cd Classifier
+  python setup.py install
+```
+
+After installing, **config**, **classify** and **merge** will be installed to the $PATH which can be executed easily. 
+
 ## Usage:
 * config.py:
 ```
